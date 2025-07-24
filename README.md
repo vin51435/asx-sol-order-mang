@@ -42,7 +42,7 @@ cd order-management-system
 npm install
 ```
 
-### 3. Environment Variables (`backend/.env`)
+### 3. Environment Variables
 
 ```
 JWT_SECRET=your-secret-key
