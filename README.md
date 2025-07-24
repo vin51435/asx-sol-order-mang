@@ -1,37 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Order Management System
 
-## Getting Started
+A full-stack web application for managing product orders. Customers can place orders via a public form. Admins can manage these orders through a protected dashboard with real-time updates.
 
-First, run the development server:
+---
+
+## Tech Stack
+
+- **Frontend**: Next.js (App Router), Tailwind CSS, Redux Toolkit, Ant Design
+- **Backend**: Node.js, MongoDB, Mongoose, JWT
+
+---
+
+## Features
+
+### Customer
+
+- Public order form with validation
+- Fields: Name, Email, Contact, Address, Product Name, Quantity, Image Upload (.jpg/.png, max 2MB)
+
+### Admin
+
+- Login with JWT authentication
+- View, filter, edit, and delete orders
+- Real-time updates when new orders are placed
+
+---
+
+## Setup
+
+### 1. Clone the Repo
+
+```bash
+git clone https://github.com/yourusername/order-management-system.git
+cd order-management-system
+```
+
+### 2. Install Dependencies
+
+```bash
+cd order-management-system
+npm install
+```
+
+### 3. Environment Variables (`backend/.env`)
+
+```
+JWT_SECRET=your-secret-key
+MONGO_URI=mongodb://localhost:27017/orders
+EMAIL=v3p51435@gmail.com
+```
+
+### 4. Run the App
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Admin Credentials
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+Email: v3p51435@gmail.com
+Password: test
+```
 
-## Learn More
+_(Add manually to DB if not seeded, you can create more admin users using an admin **account**)_
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## API Endpoints
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `POST /api/orders` – Create order
+- `GET /api/orders` – Get all orders
+- `GET /api/orders/:id` – Get order by ID
+- `PATCH /api/orders/:id` – Update quantity
+- `DELETE /api/orders/:id` – Delete order
+- `POST /api/admin/login` – Admin login
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# asx-sol-order-mang
+- Backend follows MVC structure with centralized error handling.
+- Admin routes are protected using middleware.
+

@@ -56,13 +56,6 @@ export const requireAdmin = async (req: NextRequest) => {
 
   const payload = await verifyAuthToken(tokenValue);
 
-  if (!payload) {
-    return NextResponse.json(
-      { message: 'Unauthorized: Invalid token' },
-      { status: 401 },
-    );
-  }
-
   if (!payload || payload?.role !== 'admin') {
     throw new ApiError('Unauthorized: Not admin', 403);
   }

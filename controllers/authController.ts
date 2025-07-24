@@ -38,6 +38,10 @@ export const registerAdmin = catchAsync(async (req: NextRequest) => {
     throw new ApiError('Admin with this email already exists', 409);
   }
 
+  if (parsed.email !== process.env.EMAIL) {
+    await requireAdmin(req);
+  }
+
   const newAdmin = await Admin.create(parsed);
 
   const response = ApiResponse(201, 'Admin created successfully', newAdmin);
@@ -49,10 +53,6 @@ export const getUser = catchAsync(async (req: NextRequest) => {
   await connectDB();
 
   const payload = await requireAdmin(req);
-
-  if (!payload) {
-    throw new ApiError('Unauthorized: No token', 401);
-  }
 
   const user = await Admin.findById(payload.id);
   if (!user) {

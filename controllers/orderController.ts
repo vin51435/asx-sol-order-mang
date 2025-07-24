@@ -138,6 +138,8 @@ export const getOrderById = catchAsync(async (_req: NextRequest, id) => {
 export const updateOrderQuantity = catchAsync(async (req: NextRequest, id) => {
   await connectDB();
 
+  await requireAdmin(req);
+
   const body = await req.json();
   const validatedBody = UpdateOrderQuantityDTO.parse(body);
   const { quantity } = validatedBody;
@@ -157,8 +159,10 @@ export const updateOrderQuantity = catchAsync(async (req: NextRequest, id) => {
  * @route DELETE /api/orders/:id
  * @access Admin
  */
-export const deleteOrder = catchAsync(async (_req: NextRequest, id) => {
+export const deleteOrder = catchAsync(async (req: NextRequest, id) => {
   await connectDB();
+
+  await requireAdmin(req);
 
   const order = await Order.findByIdAndDelete(id);
   if (!order) throw new ApiError('Order not found', 404);

@@ -25,13 +25,13 @@ const Navbar = () => {
 
       {!isAuthPage && (
         <div className="flex items-center gap-4">
+          <Link href="/admin/register">
+            <Button type="primary">Register</Button>
+          </Link>
           {!isLoggedIn ? (
             <>
               <Link href="/admin/login">
                 <Button type="default">Login</Button>
-              </Link>
-              <Link href="/admin/register">
-                <Button type="primary">Register</Button>
               </Link>
             </>
           ) : (
